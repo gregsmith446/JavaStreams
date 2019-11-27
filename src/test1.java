@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 public class test1 {
 	
-	@Test
 	public void regular()
 	{
 		ArrayList<String> names = new ArrayList<String>();
@@ -32,17 +31,38 @@ public class test1 {
 	}	
 	
 	public void streamFilter()
-	{				
-		long result = Stream.of("Abijeet", "Don", "Alekhya", "Adam", "Ram").filter(s -> 
-		{
-			s.startsWith("A");
-			return true; // if false, terminal operation below; .count() will not run
-		}
-		).count();
-					
-		System.out.println(result);	
+	{						
+		ArrayList<String> names = new ArrayList<String>();
+		names.add("Abijeet");
+		names.add("Don");
+		names.add("Alekhya");
+		names.add("Adam");
+		names.add("Ram");
+		
+		// print all names longer than 4 chars
+		names.stream().filter(s -> s.length() > 4).forEach(s -> System.out.println(s));
+		// find all names longer than 4 chars but only print the first one found
+		names.stream().filter(s -> s.length() > 4 ).limit(1).forEach(s -> System.out.println(s));	
 	}
+
+	@Test
+	public void streamMap()
+	{
+		// print names that ends in "a" and into upper case
+		/*
+		Stream.of("Abijeet", "Don", "Alekhya", "Adam", "Rama")
+		.filter(s -> s.endsWith("a"))
+		.map(s -> s.toUpperCase())
+		.forEach(s -> System.out.println(s));		
+		*/
 	
+		// find names with first letter "a", convert into upper case, sort into alphabetical order, and PRINT
+		Stream.of("Azbijeet", "Don", "Alekhya", "Adam", "Rama")
+		.filter(s -> s.startsWith("A"))
+		.sorted()
+		.map(s -> s.toUpperCase())
+		.forEach(s -> System.out.println(s));
+	}
 }
 
 
