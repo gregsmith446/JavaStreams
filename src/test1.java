@@ -32,25 +32,15 @@ public class test1 {
 	}	
 	
 	public void streamFilter()
-	{
-		ArrayList<String> names = new ArrayList<String>();
-		names.add("Abijeet");
-		names.add("Don");
-		names.add("Alekhya");
-		names.add("Adam");
-		names.add("Ram");
-		
-		// make list stream compatible -> .stream()
-		// perform intermediate operation -> .filter()
-		// perform terminal operation to get result -> .count()
-		// the terminal operation only runs if the intermediate operation returns true
-		Long count = names.stream().filter(s -> s.startsWith("A")).count();
-		System.out.println(count);	
-		
-		
-		
-		
-		
+	{				
+		long result = Stream.of("Abijeet", "Don", "Alekhya", "Adam", "Ram").filter(s -> 
+		{
+			s.startsWith("A");
+			return true; // if false, terminal operation below; .count() will not run
+		}
+		).count();
+					
+		System.out.println(result);	
 	}
 	
 }
